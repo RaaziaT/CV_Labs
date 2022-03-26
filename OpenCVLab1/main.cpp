@@ -11,9 +11,14 @@
 #include <opencv2/imgproc.hpp>
 #include <iostream>
 #include <string>
+#include "task2.h"
 
 using namespace std;
 using namespace cv;
+
+int MAX_KERNEL_LENGTH = 31;
+int histSize = 256;
+
 
 class Lab1 {
 public:
@@ -158,20 +163,95 @@ public:
     }
 };
 
+class Lab2 {
+public: void task1(cv::Mat img){
+    cv::Mat gray(img.cols, img.rows, CV_8U);
+    cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+    imwrite("/Users/apple/Desktop/image_grayscale.jpg", gray);
+    imshow( "Source image", img );
+    imshow( "Source image in gray", gray);
+    cv::waitKey(0);
+}
+    
+public:void task2A(cv::Mat img){
+    cv::Mat img6 = MaxFilter(img, 5);
+    cv::imwrite("/Users/apple/Desktop/image_max.jpg", img6);
+    cv::waitKey(0);
+}
+    
+public:void task2B(cv::Mat img){
+    cv::Mat img6 = MinFilter(img, 5);
+    cv::imwrite("/Users/apple/Desktop/image_min.jpg", img6);
+    cv::waitKey(0);
+}
+    
+public:void task3(cv::Mat src){
+    Mat dst = src.clone();
+    for ( int i = 1; i < MAX_KERNEL_LENGTH; i = i + 2 ) {
+        GaussianBlur( src, dst, Size( i, i ), 0, 0 );
+    }
+    cv::imwrite("/Users/apple/Desktop/GaussianBlur.jpg", dst);
+    for ( int i = 1; i < MAX_KERNEL_LENGTH; i = i + 2 ) {
+        medianBlur ( src, dst, i );
+    }
+    cv::imwrite("/Users/apple/Desktop/medianBlur.jpg", dst);
+    cv::waitKey(0);
+}
+    
+
+
+    void drawHistogram(cv::Mat src) {
+        vector<Mat> bgr_planes;
+            split(src, bgr_planes );
+            int histSize = 256;
+            float range[] = { 0, 255 }; //the upper boundary is exclusive
+            const float* histRange[] = { range };
+            bool uniform = true, accumulate = false;
+            Mat b_hist, g_hist, r_hist;
+            calcHist( &bgr_planes[0], 1, 0, Mat(), b_hist, 1, &histSize, histRange, uniform, accumulate );
+            calcHist( &bgr_planes[1], 1, 0, Mat(), g_hist, 1, &histSize, histRange, uniform, accumulate );
+            calcHist( &bgr_planes[2], 1, 0, Mat(), r_hist, 1, &histSize, histRange, uniform, accumulate );
+            int hist_w = 512, hist_h = 400;
+            int bin_w = cvRound( (double) hist_w/histSize );
+            Mat histImage( hist_h, hist_w, CV_8UC3, Scalar( 0,0,0) );
+            normalize(b_hist, b_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat() );
+            normalize(g_hist, g_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat() );
+            normalize(r_hist, r_hist, 0, histImage.rows, NORM_MINMAX, -1, Mat() );
+            for( int i = 1; i < histSize; i++ )
+            {
+                line( histImage, Point( bin_w*(i-1), hist_h - cvRound(b_hist.at<float>(i-1)) ),
+                      Point( bin_w*(i), hist_h - cvRound(b_hist.at<float>(i)) ),
+                      Scalar( 255, 0, 0), 2, 8, 0  );
+                line( histImage, Point( bin_w*(i-1), hist_h - cvRound(g_hist.at<float>(i-1)) ),
+                      Point( bin_w*(i), hist_h - cvRound(g_hist.at<float>(i)) ),
+                      Scalar( 0, 255, 0), 2, 8, 0  );
+                line( histImage, Point( bin_w*(i-1), hist_h - cvRound(r_hist.at<float>(i-1)) ),
+                      Point( bin_w*(i), hist_h - cvRound(r_hist.at<float>(i)) ),
+                      Scalar( 0, 0, 255), 2, 8, 0  );
+            }
+            imshow("Source image", src );
+            imshow("calcHist Demo", histImage );
+            waitKey();
+}
+    void task5(cv::Mat src){
+        cvtColor( src, src, COLOR_BGR2GRAY );
+           Mat dst;
+           equalizeHist( src, dst );
+           imshow( "Source image", src );
+           imshow( "Equalized Image", dst );
+           waitKey();
+
+    }
+};
+
 int main(int argc, char** argv) {
     cv::Mat img = cv::imread(argv[1]);
     cv::Mat img2 = cv::imread(argv[2]);
+    cv::Mat image = cv::imread(argv[3]);
+     
+    Lab2 lab2;
+    lab2.task5(image);
     
-    Lab1 lab1;
-    //    lab1.task1and2(img, img2);
-    //    lab1.task3a(true);
-    //    lab1.task3a(false);
-    //    lab1.task3b(20);
-    //    lab1.task3b(50);
-    //    lab1.task4(0, img);
-    //    lab1.task4(1, img);
-    lab1.task4(2, img);
-    //    lab1.task5(img);
-    //    lab1.task6(img);
+    
     return 0;
 }

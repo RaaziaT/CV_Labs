@@ -59,6 +59,10 @@
             argument = "/Users/apple/Downloads/Lena_grayscale.jpg"
             isEnabled = "YES">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Users/apple/Downloads/image.jpg"
+            isEnabled = "YES">
+         </CommandLineArgument>
       </CommandLineArguments>
       <EnvironmentVariables>
          <EnvironmentVariable
@@ -69,6 +73,11 @@
          <EnvironmentVariable
             key = "image2"
             value = "/Users/apple/Downloads/Lena_grayscale.jpg"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "image3"
+            value = "/Users/apple/Downloads/image.jpg"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

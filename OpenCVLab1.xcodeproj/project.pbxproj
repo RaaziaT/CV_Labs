@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		188F233E27E94AE800589C7B /* task2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 188F233C27E94AE800589C7B /* task2.cpp */; };
 		18F027AD27D8EC250035F000 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18F027AC27D8EC250035F000 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,10 +24,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		188F233C27E94AE800589C7B /* task2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = task2.cpp; sourceTree = "<group>"; };
+		188F233D27E94AE800589C7B /* task2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = task2.h; sourceTree = "<group>"; };
 		18F027A927D8EC250035F000 /* OpenCVLab1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenCVLab1; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F027AC27D8EC250035F000 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		18F027B327D8F06A0035F000 /* OpenCVLab1.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenCVLab1.entitlements; sourceTree = "<group>"; };
-		18F028F627D932DD0035F000 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = ../../../usr/local/Cellar/opencv/4.5.5/lib; sourceTree = "<group>"; };
 		18F028F727D938340035F000 /* Lena_color.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Lena_color.jpg; path = ../../Downloads/Lena_color.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,7 +46,6 @@
 		18F027A027D8EC240035F000 = {
 			isa = PBXGroup;
 			children = (
-				18F028F627D932DD0035F000 /* lib */,
 				18F027AB27D8EC250035F000 /* OpenCVLab1 */,
 				18F027AA27D8EC250035F000 /* Products */,
 			);
@@ -61,6 +62,8 @@
 		18F027AB27D8EC250035F000 /* OpenCVLab1 */ = {
 			isa = PBXGroup;
 			children = (
+				188F233C27E94AE800589C7B /* task2.cpp */,
+				188F233D27E94AE800589C7B /* task2.h */,
 				18F028F727D938340035F000 /* Lena_color.jpg */,
 				18F027B327D8F06A0035F000 /* OpenCVLab1.entitlements */,
 				18F027AC27D8EC250035F000 /* main.cpp */,
@@ -126,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18F027AD27D8EC250035F000 /* main.cpp in Sources */,
+				188F233E27E94AE800589C7B /* task2.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
